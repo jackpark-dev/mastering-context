@@ -28,11 +28,22 @@ const Counter = () => {
   return <div>Counter: {counter}</div>;
 };
 
-export default function CounterUseState() {
+function CounterUseState() {
   return (
     <CounterContextProvider>
       <Container />
       <Counter />
     </CounterContextProvider>
+  );
+}
+
+export default function CounterUserContextPage() {
+  return (
+    <div>
+      <CounterUseState />
+      <CounterUseState />
+      <CounterUseState />
+      <CounterUseState />
+    </div>
   );
 }
