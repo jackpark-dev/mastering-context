@@ -1,4 +1,5 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState } from "react";
+import { createContext, useContextSelector } from "use-context-selector";
 
 const useStore = () => {
   const [user, setUser] = useState("");
@@ -21,9 +22,12 @@ export const StoreContextProvider = ({ children }) => {
   );
 };
 
-export const useLogin = () => useContext(StoreContext).login;
-export const useLogout = () => useContext(StoreContext).logout;
-export const useAddToCart = () => useContext(StoreContext).addToCart;
+export const useLogin = () => useContextSelector(StoreContext, (s) => s.login);
+export const useLogout = () =>
+  useContextSelector(StoreContext, (s) => s.logout);
+export const useAddToCart = () =>
+  useContextSelector(StoreContext, (s) => s.addToCart);
 
-export const useUser = () => useContext(StoreContext).user;
-export const useCartCount = () => useContext(StoreContext).cartCount;
+export const useUser = () => useContextSelector(StoreContext, (s) => s.user);
+export const useCartCount = () =>
+  useContextSelector(StoreContext, (s) => s.cartCount);
