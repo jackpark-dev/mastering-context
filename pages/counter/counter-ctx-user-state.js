@@ -8,9 +8,9 @@ const CounterContextProvider = ({ children }) => (
   </CounterContext.Provider>
 );
 
-const Container = ({ setCounter }) => (
+const Container = () => (
   <div>
-    <AddOneButton setCounter={setCounter} />
+    <AddOneButton />
   </div>
 );
 

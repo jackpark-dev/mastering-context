@@ -6,6 +6,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "add":
       return state + 1;
+    case "subtract":
+      return state - 1;
     default:
       return state;
   }
@@ -17,9 +19,10 @@ const CounterContextProvider = ({ children }) => (
   </CounterContext.Provider>
 );
 
-const Container = ({ setCounter }) => (
+const Container = () => (
   <div>
-    <AddOneButton setCounter={setCounter} />
+    <AddOneButton />
+    <SubtractOneButton />
   </div>
 );
 
@@ -35,6 +38,22 @@ const AddOneButton = () => {
         }
       >
         Add One
+      </button>
+    </div>
+  );
+};
+const SubtractOneButton = () => {
+  const [, dispatch] = useContext(CounterContext);
+  return (
+    <div>
+      <button
+        onClick={() =>
+          dispatch({
+            type: "subtract",
+          })
+        }
+      >
+        Subtract One
       </button>
     </div>
   );
