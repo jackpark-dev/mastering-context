@@ -1,4 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, createContext, useContext } from "react";
+
+const CounterContext = createContext(null);
+
+const CounterContextProvider = ({ children }) => (
+  <CounterContext.Provider value={useState(0)}>
+    {children}
+  </CounterContext.Provider>
+);
 
 const Container = ({ setCounter }) => (
   <div>
@@ -6,7 +14,8 @@ const Container = ({ setCounter }) => (
   </div>
 );
 
-const AddOneButton = ({ setCounter }) => {
+const AddOneButton = () => {
+  const [, setCounter] = useContext(CounterContext);
   return (
     <div>
       <button onClick={() => setCounter((v) => v + 1)}>Add One</button>
@@ -14,14 +23,16 @@ const AddOneButton = ({ setCounter }) => {
   );
 };
 
-const Counter = ({ counter }) => <div>Counter: {counter}</div>;
+const Counter = () => {
+  const [counter] = useContext(CounterContext);
+  return <div>Counter: {counter}</div>;
+};
 
 export default function CounterUseState() {
-  const [counter, setCounter] = useState(0);
   return (
-    <div>
-      <Container setCounter={setCounter} />
-      <Counter counter={counter} />
-    </div>
+    <CounterContextProvider>
+      <Container />
+      <Counter />
+    </CounterContextProvider>
   );
 }
