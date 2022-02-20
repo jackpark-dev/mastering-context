@@ -13,6 +13,14 @@ const useStore = () => {
   };
 };
 
+const StoreContext = createContext(null);
+
+export const StoreContextProvider = ({ children }) => {
+  return (
+    <StoreContext.Provider value={useStore()}>{children}</StoreContext.Provider>
+  );
+};
+
 export const useLogin = () => useStore((state) => state.login);
 export const useLogout = () => useStore((state) => state.logout);
 export const useAddToCart = () => useStore((state) => state.addToCart);
