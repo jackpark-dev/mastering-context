@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 
 const useStore = () => {
   const [user, setUser] = useState("");
@@ -21,9 +21,9 @@ export const StoreContextProvider = ({ children }) => {
   );
 };
 
-export const useLogin = () => useStore((state) => state.login);
-export const useLogout = () => useStore((state) => state.logout);
-export const useAddToCart = () => useStore((state) => state.addToCart);
+export const useLogin = () => useContext(StoreContext).login;
+export const useLogout = () => useContext(StoreContext).logout;
+export const useAddToCart = () => useContext(StoreContext).addToCart;
 
-export const useUser = () => useStore((state) => state.user);
-export const useCartCount = () => useStore((state) => state.cartCount);
+export const useUser = () => useContext(StoreContext).user;
+export const useCartCount = () => useContext(StoreContext).cartCount;
